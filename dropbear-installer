@@ -1,0 +1,194 @@
+#!/bin/bash
+clear
+# Dropbear installer v2
+# cores
+b="\033[1;37m"
+v="\033[1;32m"
+Ver="\033[1;31m"
+#
+if cat /etc/shells |grep "/bin/false" >/dev/null; then
+echo -n
+else
+echo "/bin/false" >>/etc/shells
+fi
+echo -e "\033[0m                \033[47;30m DROPBEAR INSTALLER\033[0m"
+echo ''
+echo -e '\033[1;37mAbaixo adicione uma porta para
+adicionar ao dropbear.'
+printf '\033[1;32mPorta: ';read porta
+if [[ -z "$porta" ]]; then
+  echo -e "\033[1;37mPorta invalida!"
+  sleep 1.5
+  echo -e "Saindo..."
+  sleep 1.5
+  exit 69
+fi
+if [[ "$porta" = '80' ]]; then
+	if [[ -f /etc/squid3/squid.conf ]]; then
+		echo -e "$Ver"'Squid3 instalado!'
+		echo ''
+		echo -e "$b""Para continuar com a instalacao\ndo dropbear na porta 80 tera que parar o squid3"
+		sleep 0.5
+		echo ''
+		read -p "Continuar? s/n: " re
+		if [[ "$re" = 's' ]]; then
+              echo -e "$v""Continuando..."
+              sleep  1
+              echo ''
+              echo -e "\033[1;37mParando squid3..."
+              service squid3 stop 1>/dev/null 2>/dev/null
+              sleep 1
+              echo -e ""$b"["$v"OK"$b"]$b Sucesso..."
+              echo -e "\033[1;37mInstalando dropbear..."
+              apt-get update 1>/dev/null 2>/dev/null
+              apt-get install dropbear -y 1>/dev/null 2>/dev/null
+              echo -e ""$b"["$v"OK"$b"]$b Sucesso..."
+              sleep 1
+              echo -e "\033[1;37mAdicionando porta..."
+              echo "NO_START=0" > /etc/default/dropbear
+              echo "DROPBEAR_PORT=80" >> /etc/default/dropbear
+              sleep 1
+              echo -e ""$b"["$v"OK"$b"]$b Sucesso..."
+              echo -e "\033[1;37mReniciando dropbear..."
+              service dropbear start 1>/dev/null 2>/dev/null
+              service dropbear restart 1>/dev/null 2>/dev/null
+              sleep 1
+              echo -e ""$b"["$v"OK"$b"]$b Sucesso..."
+              echo ''
+              echo -e "\033[1;37mInstalacao finalizada com sucesso."
+              exit 69
+    fi 
+    if [[ "$re" = 'n' ]]; then
+               echo -e ""$Ver"Saindo..."
+               sleep 1
+               exit 69
+    fi
+    fi
+    if [[ -f /etc/squid/squid.conf ]]; then
+		echo -e "$Ver"'Squid instalado!'
+		echo ''
+		echo -e "$b""Para continuar com a instalacao\ndo dropbear na porta 80 tera que parar o squid"
+		sleep 0.5
+		echo ''
+		read -p "Continuar? s/n: " rees
+		if [[ "$rees" = 's' ]]; then
+              echo -e "$v""Continuando..."
+              sleep  1
+              echo ''
+              echo -e "\033[1;37mParando squid..."
+              service squid stop 1>/dev/null 2>/dev/null
+              echo -e ""$b"["$v"OK"$b"]$b Sucesso..."
+              sleep 1
+              echo -e "\033[1;37mInstalando dropbear..."
+              apt-get update 1>/dev/null 2>/dev/null
+              apt-get install dropbear -y 1>/dev/null 2>/dev/null
+              sleep 1
+              echo -e "\033[1;37mAdicionando porta..."
+              echo "NO_START=0" > /etc/default/dropbear
+              echo "DROPBEAR_PORT=80" >> /etc/default/dropbear
+              sleep 1
+              echo -e ""$b"["$v"OK"$b"]$b Sucesso..."
+              echo -e "\033[1;37mReniciando dropbear..."
+              service dropbear start 1>/dev/null 2>/dev/null
+              service dropbear restart 1>/dev/null 2>/dev/null
+              sleep 1
+              echo -e ""$b"["$v"OK"$b"]$b Sucesso..."
+              echo ''
+              echo -e "\033[1;37mInstalacao finalizada com sucesso."
+              exit 69
+    fi
+    if [[ "$rees" = 'n' ]]; then
+               echo -e ""$Ver"Saindo..."
+               sleep 1
+               exit 69
+    fi
+    fi
+fi
+if [[ "$porta" = '443' ]]; then
+  if cat /etc/ssh/sshd_config |grep "443" >/dev/null; then
+    echo -e ""$Ver"Porta 443 esta adicionanda no sshd!"
+    echo ''
+    echo -e ""$b"Para continuar com a instalacao do dropbear
+    na porta 443teras que remover a porta 4443 do sshd"
+    echo ''
+    read -p "Continuar s/n: " ss
+      if [[ "$ss" = 's' ]]; then
+      	echo -e "$v""Continuando..."
+      	echo ''
+      	echo -e "\033[1;37mRemovendo porta do sshd..."
+      	echo "Port 22
+Protocol 2
+KeyRegenerationInterval 3600
+ServerKeyBits 1024
+SyslogFacility AUTH
+LogLevel INFO
+LoginGraceTime 120
+PermitRootLogin yes
+StrictModes yes
+RSAAuthentication yes
+PubkeyAuthentication yes
+IgnoreRhosts yes
+RhostsRSAAuthentication no
+HostbasedAuthentication no
+PermitEmptyPasswords no
+ChallengeResponseAuthentication no
+PasswordAuthentication yes
+X11Forwarding yes
+X11DisplayOffset 10
+PrintMotd no
+PrintLastLog yes
+TCPKeepAlive yes
+#UseLogin no
+AcceptEnv LANG LC_*
+Subsystem sftp /usr/lib/openssh/sftp-server
+UsePAM yes" > /etc/ssh/sshd_config
+        sleep 1
+        echo -e ""$b"["$v"OK"$b"]$b Sucesso..."
+        echo -e "\033[1;37mReniciando openssh..."
+        service ssh restart >/dev/null 2>/dev/null
+        sleep 1
+        echo -e ""$b"["$v"OK"$b"]$b Sucesso..."
+        echo -e "\033[1;37mInstalando dropbear..."
+        apt-get update 1>/dev/null 2>/dev/null
+        apt-get install dropbear -y 1>/dev/null 2>/dev/null
+        sleep 1
+        echo -e ""$b"["$v"OK"$b"]$b Sucesso..."
+        echo -e "\033[1;37mAdicionando porta..."
+echo "NO_START=0" > /etc/default/dropbear
+echo "DROPBEAR_PORT=443" >> /etc/default/dropbear
+        sleep 1
+        echo -e ""$b"["$v"OK"$b"]$b Sucesso..."
+        echo -e "\033[1;37mReniciando dropbear..."
+        service dropbear restart 1>/dev/null 2>/dev/null
+        sleep 1
+        echo -e ""$b"["$v"OK"$b"]$b Sucesso..."
+        echo ''
+        exit 69
+    else
+    	echo -e -n ""
+    fi
+    if [[ "$ss" = 'n' ]]; then
+    	echo -e ""$Ver"Saindo..."
+        sleep 1
+    	exit 69
+    fi
+fi
+fi
+ echo -e "\033[1;37mInstalando dropbear..."
+              apt-get update 1>/dev/null 2>/dev/null
+              apt-get install dropbear -y 1>/dev/null 2>/dev/null
+              sleep 1
+              echo -e ""$b"["$v"OK"$b"]$b Sucesso..."
+              echo -e "\033[1;37mAdicionando porta..."
+              echo "NO_START=0" > /etc/default/dropbear
+              echo "DROPBEAR_PORT=$porta" >> /etc/default/dropbear
+              sleep 1
+              echo -e ""$b"["$v"OK"$b"]$b Sucesso..."
+              echo -e "\033[1;37mReniciando dropbear..."
+              service dropbear start 1>/dev/null 2>/dev/null
+              service dropbear restart 1>/dev/null 2>/dev/null
+              sleep 1
+              echo -e ""$b"["$v"OK"$b"]$b Sucesso..."
+              echo ''
+              echo -e "\033[1;37mInstalacao finalizada com sucesso."
+              exit 69

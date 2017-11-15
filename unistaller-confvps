@@ -1,0 +1,23 @@
+#!/bin/bash
+b="\033[1;37m"
+v="\033[1;32m"
+Ver="\033[1;31m"
+rm /bin/menu
+rm /bin/users-gen
+rm /bin/squid3-installer
+rm /bin/dropbear-installer
+rm /bin/alterar-senha
+rm /bin/vps-update
+rm /bin/reboot-vps
+rm /bin/banner
+rm /bin/speedtest.py
+rm /bin/addhost
+rm /bin/unistaller-modulos
+rm /bin/monitor-ssh
+rm /bin/vpn-installer
+rm /bin/unistaller-menu
+rm -rf /etc/menu/usuarios
+rm -rf /etc/menu
+sleep 2
+echo -e ""$v"menu REMOVIDO..."
+exit

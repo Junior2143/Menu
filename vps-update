@@ -1,0 +1,18 @@
+#!/bin/bash
+clear
+b="\033[1;37m"
+v="\033[1;32m"
+Ver="\033[1;31m"
+echo -e ""$b"ATUALIZANDO REPOSITORIOS..."
+if apt-get update -y 1>/dev/null 2>/dev/null
+then
+apt-get upgrade -y 1>/dev/null 2>/dev/null
+echo ""
+echo -e ""$v"Sucesso! "$b"REPOSITORIOS ATUALIZADOS COM SUCESSO.."
+else
+yum -y update 1>/dev/null 2>/dev/null
+yum -y upgrade 1>/dev/null 2>/dev/null
+echo ""
+echo -e ""$v"Sucesso! "$b"REPOSITORIOS ATUALIZADOS COM SUCESSO.."
+sleep 2
+fi
