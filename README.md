@@ -1,25 +1,12 @@
 # Bem vindo (a) esse é meu github nele irei estar sempre atualizando meu script com o nome menu 2.0 
 # Para fazer a instalação do menu 2.0 em seu servidor vps
 # Execute os comando abaixo
-
-
-==========
-==========
-menu 2.0
-
-UM SCRIPT PARA GERENCIAR SUA VPS
----------
-
-Instalador (Recomendado)
-------------------------
-
-Obs: Execute como ROOT
-
-::
+# FEITO - GlEmYsSoN - Todos os credidos reservados ao criador, apenas foi feia pequenas edições.
+# https://github.com/GlEmYsSoN-LiNuX/CONFVPS
 
     apt-get update
     apt-get install wget sudo
-    wget https://raw.githubusercontent.com/glemysson-Hacker/GlEmYsSoN/master/installer.sh
+    wget https://raw.githubusercontent.com/Junior2143/Menu/master/installer.sh
     chmod +x installer.sh
     bash installer.sh
 
