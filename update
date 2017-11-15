@@ -13,7 +13,7 @@ if yum -y update 1>/dev/null 2>/dev/null
 then
 yum -y update 1>/dev/null 2>/dev/null
 yum -y install git 1>/dev/null 2>/dev/null
-git clone https://github.com/GlEmYsSoN-LiNuX/menu.git 1>/dev/null 2>/dev/null
+git clone https://github.com/Junior2143/Menu.git 1>/dev/null 2>/dev/null
 cd menu
 rm -rf README.md
 rm -rf install
@@ -37,7 +37,7 @@ echo -e ""$v"SEU IP: $Ver$IP"
 echo -e ""$v"SEU NOME: $Ver$dono"
 apt-get update 1>/dev/null 2>/dev/null
 apt-get install -y git 1>/dev/null 2>/dev/null
-git clone https://github.com/GlEmYsSoN-LiNuX/menu.git 1>/dev/null 2>/dev/null
+git clone https://github.com/Junior2143/Menu.git 1>/dev/null 2>/dev/null
 cd menu
 rm -rf README.md
 rm -rf installer.sh
