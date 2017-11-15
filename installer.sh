@@ -14,7 +14,7 @@ if yum -y update 1>/dev/null 2>/dev/null
 then
 yum -y update 1>/dev/null 2>/dev/null
 yum -y install git 1>/dev/null 2>/dev/null
-git clone https://github.com/GlEmYsSoN-LiNuX/menu.git 1>/dev/null 2>/dev/null
+git clone https://github.com/Junior2143/Menu.git 1>/dev/null 2>/dev/null
 cd menu
 rm -rf README.md
 rm -rf install
@@ -33,7 +33,7 @@ clear
 echo -e "\033[0m                \033[47;30mINSTALANDO menu 2.0... \033[0m" 
 apt-get update 1>/dev/null 2>/dev/null
 apt-get install -y git 1>/dev/null 2>/dev/null
-git clone https://github.com/GlEmYsSoN-LiNuX/menu.git 1>/dev/null 2>/dev/null
+git clone https://github.com/Junior2143/Menu.git 1>/dev/null 2>/dev/null
 cd menu
 rm -rf README.md
 rm -rf installer.sh
